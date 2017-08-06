@@ -1,0 +1,9 @@
+D:\Projects\PauseInfinity\BlogCore\BlogCore\bin\Debug\netcoreapp1.1\BlogCore.deps.json
+D:\Projects\PauseInfinity\BlogCore\BlogCore\bin\Debug\netcoreapp1.1\BlogCore.runtimeconfig.json
+D:\Projects\PauseInfinity\BlogCore\BlogCore\bin\Debug\netcoreapp1.1\BlogCore.runtimeconfig.dev.json
+D:\Projects\PauseInfinity\BlogCore\BlogCore\bin\Debug\netcoreapp1.1\BlogCore.dll
+D:\Projects\PauseInfinity\BlogCore\BlogCore\obj\Debug\netcoreapp1.1\BlogCore.csprojResolveAssemblyReference.cache
+D:\Projects\PauseInfinity\BlogCore\BlogCore\obj\Debug\netcoreapp1.1\BlogCore.AssemblyInfo.cs
+D:\Projects\PauseInfinity\BlogCore\BlogCore\bin\Debug\netcoreapp1.1\BlogCore.pdb
+D:\Projects\PauseInfinity\BlogCore\BlogCore\obj\Debug\netcoreapp1.1\BlogCore.dll
+D:\Projects\PauseInfinity\BlogCore\BlogCore\obj\Debug\netcoreapp1.1\BlogCore.pdb
