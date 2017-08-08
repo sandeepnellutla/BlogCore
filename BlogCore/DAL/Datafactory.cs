@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using BlogCore.Model;
 using System.Data;
 using System.Data.SqlClient;
@@ -21,18 +19,47 @@ namespace BlogCore.DAL
                     db.Open();
                 }
 
-                return db.Query<Category>("select * from Category").ToList();
+                return db.Query<Category>(SqlQuerieConstants.SqlGetAllCategories).ToList();
             }
         }
 
         public bool AddCategory(Category catEntity)
         {
-            throw new NotImplementedException();
+            using (IDbConnection db = new SqlConnection(ConnString))
+            {
+                if (db.State == ConnectionState.Closed)
+                {
+                    db.Open();
+                }
+
+                var dynamicParams = new
+                {
+                    Name = catEntity.Name,
+                    UrlSlug = catEntity.UrlSlug,
+                    Description = catEntity.Description
+                };
+
+                var returnResult = db.Execute(SqlQuerieConstants.SqlCreateCategory, dynamicParams);
+                return returnResult > 0;
+            }
         }
 
         public bool DeleteCategory(Category catEntity)
         {
-            throw new NotImplementedException();
+            using (IDbConnection db = new SqlConnection(ConnString))
+            {
+                var dynamicParams = new
+                {
+                    CategoryId = catEntity.CategoryId,
+                };
+
+                if (db.State == ConnectionState.Closed)
+                {
+                    db.Open();
+                }
+
+                return db.Execute(SqlQuerieConstants.SqlDeleteCategory, dynamicParams) > 0;
+            }
         }
 
         public List<Category> GetAllCategories()
@@ -44,7 +71,7 @@ namespace BlogCore.DAL
                     db.Open();
                 }
 
-                return db.Query<Category>("select * from Category").ToList();
+                return db.Query<Category>(SqlQuerieConstants.SqlGetAllCategories).ToList();
             }
         }
 
@@ -57,18 +84,29 @@ namespace BlogCore.DAL
                     db.Open();
                 }
 
-                return db.Query<Category>($"select * from Category where id={id}").FirstOrDefault();
+                return db.Query<Category>(SqlQuerieConstants.SqlGetCategoriesById, new { CategoryId = id }).FirstOrDefault();
             }
-        }
-
-        public bool InsertCategory(Category catEntity)
-        {
-            throw new NotImplementedException();
         }
 
         public bool UpdateCategory(Category catEntity)
         {
-            throw new NotImplementedException();
+            using (IDbConnection db = new SqlConnection(ConnString))
+            {
+                var dynamicParams = new
+                {
+                    CategoryId = catEntity.CategoryId,
+                    Name = catEntity.Name,
+                    UrlSlug = catEntity.UrlSlug,
+                    Description = catEntity.Description
+                };
+
+                if (db.State == ConnectionState.Closed)
+                {
+                    db.Open();
+                }
+
+                return db.Execute(SqlQuerieConstants.SqlUpdateCategory, dynamicParams) > 0;
+            }
         }
     }
 }

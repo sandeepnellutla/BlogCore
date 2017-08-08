@@ -7,7 +7,6 @@ namespace BlogCore.DAL
     {
         List<Category> GetAllCategories();
         Category GetCategory(int id);
-        bool InsertCategory(Category catEntity);
         bool UpdateCategory(Category catEntity);
         bool AddCategory(Category catEntity);
         bool DeleteCategory(Category catEntity);

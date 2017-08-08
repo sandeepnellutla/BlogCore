@@ -1,5 +1,4 @@
-﻿using BlogCore.DAL;
-using BlogCore.Model;
+﻿using BlogCore.Model;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,7 +27,7 @@ namespace BlogCore.Controllers
         [HttpGet("{Id}", Name = "GetCategory")]
         public IActionResult GetById(int id)
         {
-            var item = _context.Categories.FirstOrDefault(c => c.CategoryId == id);
+            var item = _context.GetCategoryById(id);
             if (item == null)
             {
                 return NotFound();
@@ -36,6 +35,7 @@ namespace BlogCore.Controllers
             return new ObjectResult(item);
         }
 
+        [HttpPost]
         public IActionResult Create([FromBody] Category catObject)
         {
             if (catObject == null)
@@ -43,10 +43,21 @@ namespace BlogCore.Controllers
                 return BadRequest();
             }
 
-            _context.Categories.Add(catObject);
-            _context.SaveChanges();
+            _context.Add(catObject);
 
-            return CreatedAtRoute("GetTodo", new { id = item.Id }, item);
+            return CreatedAtRoute("GetAll",null);
+        }
+
+        [HttpPut("{id}")]
+        public IActionResult Update(int id,[FromBody] Category catObject)
+        {
+            if (catObject == null)
+            {
+                return BadRequest();
+            }
+            _context.Update(catObject);
+           
+            return CreatedAtRoute("GetAll", null);
         }
     }
 }
